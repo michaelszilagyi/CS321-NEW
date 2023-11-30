@@ -14,3 +14,6 @@ src/*.class
 GIT.iml
 lib/*
 .vscode/*
+*.lst
+./target/surefire-reports/*
+./target/test-classes/*
