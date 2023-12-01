@@ -117,17 +117,36 @@ public class Approval extends Application {
 
          //todo next sprint: obtain next declaration WorkflowTable.getTask(APPROVAL)
          dec = null;
+         var isDuplicate = false;
          if(!MainScreen.database.isEmpty()) {
-            var n = WorkflowTable.getTask(WorkflowTable.Step.APPROVAL);
-            if (n != null) {
-               dec = Declaration.getFromDB(n);
-               WorkflowTable.removeTask(n);
+            var id = WorkflowTable.getTask(WorkflowTable.Step.APPROVAL);
+            if (id != null) {
+               dec = Declaration.getFromDB(id);
+               WorkflowTable.removeTask(id);
+
+               var name = dec.name;
+               var count = 0;
+               for (Declaration d : MainScreen.database) {
+                  if (name.equals(d.name)) {
+                     count += 1;
+                  }
+               }
+               if (count > 1) {
+                  isDuplicate = true;
+               }
             }
+
          }
          if (dec != null) {
             // Create text that displays fields of declaration
             var dec_fields = Declaration.class.getFields();
             var text_fields = new ArrayList<Label>();
+
+            if (isDuplicate) {
+               var l = new Label("Warning, existing declaration detected!");
+               l.setFont(new Font("Montserrat", 24));
+               vbox.getChildren().add(l);
+            }
             for(Field field : dec_fields) {
                Object f;
 
