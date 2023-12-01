@@ -21,11 +21,11 @@ public class Declaration {
     static Random rand = new Random();
     
     public static Declaration create(String date, String name, String email, int durationOfSupport,
-    int applicantNumber, String immigrantName, int alienNumber, Boolean isExpired, int declarationID) {
+    int applicantNumber, String immigrantName, int alienNumber, Boolean isExpired) {
 
         //use the constructor to create a declaration object and return it
         //randomly generate a unique declarationID to go along with it
-        Declaration dd = new Declaration(date, name, email, durationOfSupport, alienNumber, immigrantName, alienNumber, isExpired, rand.nextInt(5000));
+        Declaration dd = new Declaration(date, name, email, durationOfSupport, applicantNumber, immigrantName, alienNumber, isExpired, rand.nextInt(5000));
         return dd;
     }
 
@@ -53,6 +53,10 @@ public class Declaration {
     }
 
     public static void addToDB(Declaration d){
+        if (d == null){
+            return;
+        }
+        
         MainScreen.database.add(d);
     }
 
