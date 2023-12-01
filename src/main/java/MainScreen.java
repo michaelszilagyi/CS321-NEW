@@ -49,7 +49,7 @@ public class MainScreen extends Application {
                 GridPane.setConstraints(topLabel, 0, 0);
                 grid.getChildren().add(topLabel);
 
-                //DE BUTTON
+                //Data Entry BUTTON
                 Button DE = new Button("Data Entry");
                 GridPane.setConstraints(DE, 0, 2);
                 DE.setMaxWidth(150);
@@ -81,7 +81,7 @@ public class MainScreen extends Application {
                 mainStage = primaryStage;
                 mainScene = ourScene;
 
-                //set our screen to the DE scene
+                //set main menu screen
                 primaryStage.setScene(ourScene);
                 primaryStage.show();
 
