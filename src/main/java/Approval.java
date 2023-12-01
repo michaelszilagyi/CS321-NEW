@@ -123,6 +123,7 @@ public class Approval extends Application {
                dec = Declaration.getFromDB(n);
                WorkflowTable.removeTask(n);
             }
+         }
          if (dec != null) {
             // Create text that displays fields of declaration
             var dec_fields = Declaration.class.getFields();
