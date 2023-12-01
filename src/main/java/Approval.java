@@ -120,6 +120,7 @@ public class Approval extends Application {
          if(!MainScreen.database.isEmpty()) {
             var n = WorkflowTable.getTask(WorkflowTable.Step.APPROVAL);
             dec = Declaration.getFromDB(n);
+            WorkflowTable.removeTask(n);
          }
          if (dec != null) {
             // Create text that displays fields of declaration
@@ -247,8 +248,6 @@ public class Approval extends Application {
          //add the get next button
          vbox.getChildren().add(getNextButton);
 
-
-         //todo next sprint: obtain next declaration
          dec = make_test_decl();
 
          // Create text that displays fields of declaration
