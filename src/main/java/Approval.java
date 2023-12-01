@@ -36,13 +36,17 @@ public class Approval extends Application {
       // Create a Vbox to organize the elements vertically
       var vbox = new VBox(10);
 
+      var gnb_name = "getNextButton";
+      var home_name = "homeButton";
+
       Button home = new Button("Home");
+      home.setUserData(home_name);
       vbox.getChildren().add(home);
 
       home.setOnAction(e -> //Get back to main menu - get its stage and set its stage
       MainScreen.getStage().setScene(MainScreen.getScene()));
 
-      var gnb_name = "getNextButton";
+
 
       // Create an approval button
       Button approveButton = new Button("Approve");
@@ -51,39 +55,45 @@ public class Approval extends Application {
          //clear previous declaration
 
          Button oldNextButton = null;
+         Button oldHomeButton = null;
          for (Node n : vbox.getChildren()) {
             if (gnb_name.equals(n.getUserData())) {
                oldNextButton = (Button) n;
-               break;
+               continue;
+            }
+            if (home_name.equals(n.getUserData())) {
+               oldHomeButton = (Button) n;
             }
          }
          vbox.getChildren().clear();
 
          //add the get next button
+         vbox.getChildren().add(oldHomeButton);
          vbox.getChildren().add(oldNextButton);
-
-         //to add during next sprint
       });
 
       //create a rejection button
       Button rejectButton = new Button("Reject");
       rejectButton.setOnAction(e -> {
          //var getNextButton = getByUserData(vbox, "getNextButton");
-         Declaration.addToDB(dec);
          WorkflowTable.addTask(dec.declarationID,WorkflowTable.Step.REVIEW);
          Button oldNextButton = null;
+         Button oldHomeButton = null;
          for (Node n : vbox.getChildren()) {
             if (gnb_name.equals(n.getUserData())) {
                oldNextButton = (Button) n;
-               break;
+               continue;
             }
-            
+            if (home_name.equals(n.getUserData())) {
+               oldHomeButton = (Button) n;
+            }
          }
 
          //clear previous declaration
          vbox.getChildren().clear();
 
          //add the get next button
+         vbox.getChildren().add(oldHomeButton);
          vbox.getChildren().add(oldNextButton);
 
          //to add during next sprint
@@ -91,7 +101,7 @@ public class Approval extends Application {
 
       // Create getNext button
       Button getNextButton = new Button("Get Next");
-      getNextButton.setUserData("getNextButton");
+      getNextButton.setUserData(gnb_name);
 
       getNextButton.setOnAction(unused -> {
          
@@ -149,8 +159,10 @@ public class Approval extends Application {
             }
 
             //add approval and reject buttons
-            vbox.getChildren().add(approveButton);
-            vbox.getChildren().add(rejectButton);
+            var buttons = new HBox();
+            buttons.getChildren().addAll(approveButton, rejectButton);
+            buttons.setSpacing(5);
+            vbox.getChildren().add(buttons);
          } else {
             var l = new Label("No Declarations Yet");
             l.setFont(new Font("Montserrat", 24));
