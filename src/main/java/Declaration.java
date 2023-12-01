@@ -21,7 +21,7 @@ public class Declaration {
     static Random rand = new Random();
     
     public static Declaration create(String date, String name, String email, int durationOfSupport,
-    int applicantNumber, String immigrantName, int alienNumber, Boolean isExpired, int declarationID) {
+    int applicantNumber, String immigrantName, int alienNumber, Boolean isExpired) {
 
         //use the constructor to create a declaration object and return it
         //randomly generate a unique declarationID to go along with it

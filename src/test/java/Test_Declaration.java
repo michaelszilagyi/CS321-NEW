@@ -13,7 +13,7 @@ public class Test_Declaration {
     /* Tests create with regular input */
     @Test
     void test_create_1(){
-        Declaration dec = Declaration.create("12/01/2023", "John", "john@gmail.com", 5, 123, "Doe", 456, false, 321);
+        Declaration dec = Declaration.create("12/01/2023", "John", "john@gmail.com", 5, 123, "Doe", 456, false);
         
         assertNotNull(dec);
         assertEquals("12/01/2023", dec.date);
@@ -24,13 +24,12 @@ public class Test_Declaration {
         assertEquals("Doe", dec.immigrantName);
         assertEquals(456, dec.alienNumber);
         assertFalse(dec.isExpired);
-        assertEquals(321, dec.declarationID);
     }
 
     /* Tests create with regular input 2x */
     @Test
     void test_create_2(){
-        Declaration dec = Declaration.create("06/12/2020", "Hiba", "hiba@gmail.com", 3, 456, "Awan", 789, false, 654);
+        Declaration dec = Declaration.create("06/12/2020", "Hiba", "hiba@gmail.com", 3, 456, "Awan", 789, false);
         
         assertNotNull(dec);
         assertEquals("06/12/2020", dec.date);
@@ -41,13 +40,12 @@ public class Test_Declaration {
         assertEquals("Awan", dec.immigrantName);
         assertEquals(789, dec.alienNumber);
         assertFalse(dec.isExpired);
-        assertEquals(654, dec.declarationID);
     }
 
     /* Tests create with null values */
     @Test
     void test_create_3(){
-        Declaration dec = Declaration.create(null, null, null, -1, -1, null, -1, true, -1);
+        Declaration dec = Declaration.create(null, null, null, -1, -1, null, -1, true);
 
         assertNotNull(dec);
         assertNull(dec.date);
@@ -58,14 +56,13 @@ public class Test_Declaration {
         assertNull(dec.immigrantName);
         assertEquals(-1, dec.alienNumber);
         assertTrue(dec.isExpired);
-        assertNotEquals(-1, dec.declarationID);
     }
 
     /* Tests create by comparing two declarations */
     @Test
     void test_create_4(){
-        Declaration dec1 = Declaration.create("12/01/2021", "John", "john@gmail.com", 5, 12345, "Doe", 9876, false, 1001);
-        Declaration dec2 = Declaration.create("12/02/2020", "Jane", "jane@gmail.com", 4, 54321, "Smith", 6543, true, 1002);
+        Declaration dec1 = Declaration.create("12/01/2021", "John", "john@gmail.com", 5, 12345, "Doe", 9876, false);
+        Declaration dec2 = Declaration.create("12/02/2020", "Jane", "jane@gmail.com", 4, 54321, "Smith", 6543, true);
 
         assertNotNull(dec1);
         assertNotNull(dec2);
@@ -77,7 +74,7 @@ public class Test_Declaration {
     /* Tests with existing id */
     @Test
     void test_get_1(){
-        Declaration dec = Declaration.create("12/01/2023", "John", "john@gmail.com", 5, 123, "Doe", 456, false, 321);
+        Declaration dec = new Declaration("12/01/2023", "John", "john@gmail.com", 5, 123, "Doe", 456, false, 321);
         MainScreen.database.add(dec);
 
         Declaration retrievedDec = Declaration.getFromDB(321);
@@ -110,8 +107,8 @@ public class Test_Declaration {
     /* Tests with multiple declarations */
     @Test
     void test_get_4(){
-        Declaration dec1 = Declaration.create("06/12/2020", "Hiba", "hiba@gmail.com", 2, 259, "Awan", 371, false, 604);
-        Declaration dec2 = Declaration.create("02/27/2019", "Mehr", "mehr@gmail.com", 6, 537, "Bano", 416, true, 713);
+        Declaration dec1 = new Declaration("06/12/2020", "Hiba", "hiba@gmail.com", 2, 259, "Awan", 371, false, 604);
+        Declaration dec2 = new Declaration("02/27/2019", "Mehr", "mehr@gmail.com", 6, 537, "Bano", 416, true, 713);
         MainScreen.database.add(dec1);
         MainScreen.database.add(dec2);
 
