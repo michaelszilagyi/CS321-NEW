@@ -125,4 +125,9 @@ public class Test_Declaration {
     }
 
     /* ADD FUNCTION TESTS */
+
+    @Test
+    void test_add_1(){
+        MainScreen.database.clear();
+    }
 }

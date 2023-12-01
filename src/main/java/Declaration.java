@@ -25,7 +25,7 @@ public class Declaration {
 
         //use the constructor to create a declaration object and return it
         //randomly generate a unique declarationID to go along with it
-        Declaration dd = new Declaration(date, name, email, durationOfSupport, alienNumber, immigrantName, alienNumber, isExpired, rand.nextInt(5000));
+        Declaration dd = new Declaration(date, name, email, durationOfSupport, applicantNumber, immigrantName, alienNumber, isExpired, rand.nextInt(5000));
         return dd;
     }
 
