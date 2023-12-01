@@ -66,7 +66,7 @@ public class DE_screen extends Application {
         //APPLICANT NUMBER FIELD
         TextField appnum = new TextField();
         appnum.setPrefColumnCount(15);
-        appnum.setPromptText("Enter your applicant number. (12 Digits)");
+        appnum.setPromptText("Enter your applicant number. (9 Digits)");
         GridPane.setConstraints(appnum, 0, 5);
         grid.getChildren().add(appnum);
 
