@@ -119,9 +119,10 @@ public class Approval extends Application {
          dec = null;
          if(!MainScreen.database.isEmpty()) {
             var n = WorkflowTable.getTask(WorkflowTable.Step.APPROVAL);
-            dec = Declaration.getFromDB(n);
-            WorkflowTable.removeTask(n);
-         }
+            if (n != null) {
+               dec = Declaration.getFromDB(n);
+               WorkflowTable.removeTask(n);
+            }
          if (dec != null) {
             // Create text that displays fields of declaration
             var dec_fields = Declaration.class.getFields();
