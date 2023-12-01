@@ -145,7 +145,7 @@ public class DE_screen extends Application {
                     Declaration d = null;
                     try {
                         d = Declaration.create(date.getText(), name.getText(), email.getText(), Integer.parseInt(duration.getText()), Integer.parseInt(appnum.getText()), iname.getText(), Integer.parseInt(anum.getText()), false);
-                    } catch (Exception x){
+                    } catch (NumberFormatException x){
                         errorLabel.setText("WARNING: Check formatting for all fields. Make sure number fields only include numerical digits.");
                         bad = true;
                     }

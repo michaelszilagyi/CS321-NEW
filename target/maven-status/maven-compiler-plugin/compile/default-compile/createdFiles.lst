@@ -2,8 +2,8 @@ Approval.class
 DE_screen$1.class
 MainScreen.class
 DE_screen$2.class
-WorkflowTable$Step.class
 WorkflowTable.class
+WorkflowTable$Step.class
 Declaration.class
 Review_Screen.class
 DE_screen.class
