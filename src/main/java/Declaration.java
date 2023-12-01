@@ -53,6 +53,10 @@ public class Declaration {
     }
 
     public static void addToDB(Declaration d){
+        if (d == null){
+            return;
+        }
+        
         MainScreen.database.add(d);
     }
 

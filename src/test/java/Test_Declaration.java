@@ -26,7 +26,7 @@ public class Test_Declaration {
         assertFalse(dec.isExpired);
     }
 
-    /* Tests create with regular input 2x */
+    /* Tests create with regular input #2 */
     @Test
     void test_create_2(){
         Declaration dec = Declaration.create("06/12/2020", "Hiba", "hiba@gmail.com", 3, 456, "Awan", 789, false);
@@ -69,11 +69,13 @@ public class Test_Declaration {
         assertNotEquals(dec1.declarationID, dec2.declarationID);
     }
 
-    /* GETFROMDB FUNCTION TESTS */
+    /* GET FROM DB FUNCTION TESTS */
 
     /* Tests with existing id */
     @Test
     void test_get_1(){
+        MainScreen.database = new LinkedList<>();
+        
         Declaration dec = new Declaration("12/01/2023", "John", "john@gmail.com", 5, 123, "Doe", 456, false, 321);
         MainScreen.database.add(dec);
 
@@ -87,7 +89,7 @@ public class Test_Declaration {
     /* Tests with non-existing id */
     @Test
     void test_get_2(){
-        MainScreen.database.clear();
+        MainScreen.database = new LinkedList<>();
 
         Declaration dec = Declaration.getFromDB(999);
 
@@ -97,7 +99,7 @@ public class Test_Declaration {
     /* Tests with empty database */
     @Test
     void test_get_3(){
-        MainScreen.database.clear();
+        MainScreen.database = new LinkedList<>();
 
         Declaration retrievedDeclaration = Declaration.getFromDB(321);
 
@@ -107,6 +109,8 @@ public class Test_Declaration {
     /* Tests with multiple declarations */
     @Test
     void test_get_4(){
+        MainScreen.database = new LinkedList<>();
+        
         Declaration dec1 = new Declaration("06/12/2020", "Hiba", "hiba@gmail.com", 2, 259, "Awan", 371, false, 604);
         Declaration dec2 = new Declaration("02/27/2019", "Mehr", "mehr@gmail.com", 6, 537, "Bano", 416, true, 713);
         MainScreen.database.add(dec1);
@@ -121,10 +125,108 @@ public class Test_Declaration {
         assertEquals(713, retrieveDec2.declarationID);
     }
 
-    /* ADD FUNCTION TESTS */
+    /* ADD TO DB FUNCTION TESTS */
 
+    /* Test with one declaration */
     @Test
     void test_add_1(){
+        MainScreen.database = new LinkedList<>();
+
+        Declaration dec = Declaration.create("12/01/2023", "John", "john@gmail.com", 5, 123, "Doe", 456, false);
+        Declaration.addToDB(dec);
+
+        assertTrue(MainScreen.database.contains(dec));
+    }
+
+    /* Test with one declaration #2 */
+    @Test
+    void test_add_2(){
+        MainScreen.database = new LinkedList<>();
+
+        Declaration dec = Declaration.create("12/01/2023", "John", "john@gmail.com", 5, 123, "Doe", 456, false);
+        Declaration.addToDB(dec);
+
+        assertEquals(1, MainScreen.database.size());
+    }
+
+    /* Tests with multiple declarations */
+    @Test
+    void test_add_3(){
+        MainScreen.database = new LinkedList<>();
+        
+        Declaration dec1 = new Declaration("06/12/2020", "Hiba", "hiba@gmail.com", 2, 259, "Awan", 371, false, 604);
+        Declaration dec2 = new Declaration("02/27/2019", "Mehr", "mehr@gmail.com", 6, 537, "Bano", 416, true, 713);
+        MainScreen.database.add(dec1);
+        
+        Declaration.addToDB(dec2);
+
+        assertEquals(2, MainScreen.database.size());
+        assertTrue(MainScreen.database.contains(dec2));
+
         MainScreen.database.clear();
+    }
+
+    /* Test with null declaration */
+    @Test
+    void test_add_4(){
+        MainScreen.database = new LinkedList<>();
+        
+        Declaration nullDeclaration = null;
+        Declaration.addToDB(nullDeclaration);
+
+        assertEquals(0, MainScreen.database.size());
+    }
+
+    /* REMOVE FROM DB FUNCTION TESTS */
+
+    /* Tests with one existing declaration */
+    @Test
+    void test_remove_1(){
+        MainScreen.database = new LinkedList<>();
+
+        Declaration dec = new Declaration("12/01/2023", "John", "john@gmail.com", 5, 123, "Doe", 456, false, 321);
+        MainScreen.database.add(dec);
+
+        Declaration.removeFromDB(321);
+
+        assertEquals(0, MainScreen.database.size());
+    }
+
+    /* Tests with multiple declarations */
+    @Test
+    void test_remove_2(){
+        MainScreen.database = new LinkedList<>();
+
+        Declaration dec1 = new Declaration("06/12/2020", "Hiba", "hiba@gmail.com", 2, 259, "Awan", 371, false, 604);
+        Declaration dec2 = new Declaration("02/27/2019", "Mehr", "mehr@gmail.com", 6, 537, "Bano", 416, true, 713);
+        MainScreen.database.add(dec1);
+        MainScreen.database.add(dec2);
+
+        Declaration.removeFromDB(604);
+
+        assertEquals(1, MainScreen.database.size());
+    }
+
+    /* Tests with non-existing id */
+    @Test
+    void test_remove_3(){
+        MainScreen.database = new LinkedList<>();
+
+        Declaration dec = new Declaration("12/01/2023", "John", "john@gmail.com", 5, 123, "Doe", 456, false, 321);
+        MainScreen.database.add(dec);
+
+        Declaration.removeFromDB(999);
+
+        assertEquals(1, MainScreen.database.size());
+    }
+
+    /* Tests with empty database */
+    @Test
+    void test_remove_4(){
+        MainScreen.database = new LinkedList<>();
+
+        Declaration.removeFromDB(321);
+
+        assertEquals(0, MainScreen.database.size());
     }
 }
